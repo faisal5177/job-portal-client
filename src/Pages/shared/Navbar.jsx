@@ -65,8 +65,8 @@ const Navbar = () => {
                 Register
               </NavLink>
               <NavLink to="/signIn">
-                <button className="btn btn-sm rounded-3xl ml-5">
-                  Sign In
+                <button className="btn btn-sm ml-5">
+                  Login
                 </button>
               </NavLink>
             </>
