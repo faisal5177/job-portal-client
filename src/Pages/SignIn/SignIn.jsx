@@ -3,10 +3,13 @@ import signInLottieData from '../../assets/Lottie/signIn.json';
 import { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
 import SocialLogin from "../shared/SocialLogin";
+import { useLocation } from "react-router-dom";
 
 const SignIn = () => {
 
     const {signInUser} = useContext(AuthContext);
+    const location = useLocation();
+    console.log('in signIn page',location);
 
 
     const handleSignIn = (e) => {

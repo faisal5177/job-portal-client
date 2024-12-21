@@ -16,8 +16,9 @@ const AuthProvider = ({children}) => {
 
     const signInUser = (email, password) => {
         setLoading(true);
-        return createUserWithEmailAndPassword(auth, email, password);
+        return signInWithEmailAndPassword(auth, email, password);  
     }
+    
 
     const signInWithGoogle = () => {
         setLoading(true); 
@@ -31,16 +32,17 @@ const AuthProvider = ({children}) => {
     }
 
     useEffect(() => {
-      const unsubscribe = onAuthStateChanged(auth, currentUser => {
-        setUser(currentUser);
-        console.log('state captured', currentUser);
-        setLoading(false);
-       })
-       return() => {
-        unsubscribe();
-       } 
-    }, [])
-
+        const unsubscribe = onAuthStateChanged(auth, currentUser => {
+            setUser(currentUser);
+            console.log('State captured:', currentUser); 
+            setLoading(false);  
+        });
+    
+        return () => {
+            unsubscribe();
+        };
+    }, []);
+    
     const authInfo ={
         user,
         loading,
