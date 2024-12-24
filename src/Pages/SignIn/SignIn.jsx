@@ -45,7 +45,7 @@ const SignIn = () => {
               <Lottie animationData={signInLottieData} />
             </div>
             <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-              <h1 className="text-5xl font-bold ml-8 mt-4">SignIn now!</h1>
+              <h1 className="text-5xl font-bold ml-8 mt-4">Login now!</h1>
               <form onSubmit={handleSignIn} className="card-body">
                 <div className="form-control">
                   <label className="label">

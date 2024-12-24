@@ -14,13 +14,13 @@ const MyApplications = () => {
   }, [user?.email]);
 
   const handleDelete = (jobId) => {
-    // Assuming there's an endpoint for deleting job applications
+    
     fetch(`http://localhost:5001/job-application/${jobId}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
       .then(() => {
-        // Remove the job from the state after deletion
+       
         setJobs(jobs.filter((job) => job._id !== jobId));
       })
       .catch((error) => console.error("Error deleting job:", error));
