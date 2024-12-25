@@ -1,56 +1,50 @@
-import { FaDollarSign, FaMapMarkerAlt } from "react-icons/fa";import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { FaDollarSign, FaMapMarkerAlt } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const HotJobCard = ({ job }) => {
-  const {
-    _id,
-    title,
-    location,
-    salaryRange,
-    description,
-    company,
-    requirements,
-    company_logo,
-  } = job;
+    const { _id, title, company, company_logo, requirements, description, location, salaryRange } = job;
 
-  return (
-    <div className="flex card bg-base-100 p-4 shadow-xl text-left h-[380px] hover:shadow-2xl">
-      <div>
-        <div className="flex mb-5 gap-2">
-          <div>
-            <img className="w-[48px]" src={company_logo} alt={`${company} logo`} />
-          </div>
-          <div>
-            <h2 className="text-xl font-bold">{company}</h2>
-            <small className="flex text-gray-400">
-              <strong><FaMapMarkerAlt className="mt-1 mr-1"/></strong> {location}
-            </small>
-          </div>
+    const salaryMin = salaryRange?.min ?? '';
+    const salaryMax = salaryRange?.max ?? '';
+    const salaryCurrency = salaryRange?.currency ?? '';
+
+    return (
+        <div className="card card-compact bg-base-100 shadow-xl">
+            <div className='flex gap-2 m-2'>
+                <figure>
+                    <img
+                        className='w-16'
+                        src={company_logo}
+                        alt="Company logo" />
+                </figure>
+                <div>
+                    <h4 className="text-2xl">{company}</h4>
+                    <p className='flex gap-1 items-center'> <FaMapMarkerAlt /> {location}</p>
+                </div>
+            </div>
+            <div className="card-body">
+                <h2 className="card-title">{title}
+                    <div className="badge badge-secondary">NEW</div>
+                </h2>
+                <p>{description}</p>
+                <div className='flex gap-2 flex-wrap'>
+                    {
+                        requirements.map((skill, index) => <p
+                            key={index}
+                            className='border rounded-md text-center px-2 hover:text-purple-600 hover:bg-gray-400'
+                        >{skill}</p>)
+                    }
+                </div>
+                <div className="card-actions justify-end items-center mt-4">
+                    <p className='flex items-center'>Salary: <FaDollarSign /> {salaryMin} - {salaryMax} {salaryCurrency}</p>
+                    <Link to={`/jobs/${_id}`}>
+                        <button className="btn btn-primary">Apply</button>
+                    </Link>
+                </div>
+            </div>
         </div>
-        <div className="mb-5">
-          <h2 className="font-semibold">
-            {title}
-          </h2>
-        </div>
-        <div className="mb-5">
-          <small className="text-gray-400">{description}</small>
-        </div>
-        <div className="mb-5">
-          {requirements.slice(0, 3).map((req, index) => (
-            <button key={index} className="btn btn-xs ml-2">{req}</button>
-          ))}
-        </div>
-        <div className="flex justify-between">
-          <div className="">
-           <p className=" items-center">Salary: <span className="flex text-xs"><FaDollarSign className="mt-[2px] mr-[3px]"></FaDollarSign> {salaryRange.min} - {salaryRange.max} {salaryRange.currency}</span></p>
-          </div>
-          <Link to={`/jobs/${_id}`}>
-          <button className="btn btn-md mt-5 text-sky-400">Apply Now</button>
-          </Link>
-        </div>      
-      </div>
-    </div>
-  );
+    );
 };
 
 export default HotJobCard;
