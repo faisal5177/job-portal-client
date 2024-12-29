@@ -7,20 +7,29 @@ const MyApplications = () => {
 
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:5001/job-application?email=${user.email}`)
-        .then((res) => res.json())
-        .then((data) => setJobs(data));
+      //   fetch(`https://job-protal-server-nine.vercel.app/job-application?email=${user.email}`)
+      //     .then((res) => res.json())
+      //     .then((data) => setJobs(data));
+      // }
+
+      axios
+        .get(
+          `https://job-protal-server-nine.vercel.app/job-application?email=${user.email}`,
+          { withCredentials: true }
+        )
+        .then((res) => setJobs(res.data));
     }
   }, [user?.email]);
 
   const handleDelete = (jobId) => {
-    
-    fetch(`http://localhost:5001/job-application/${jobId}`, {
-      method: "DELETE",
-    })
+    fetch(
+      `https://job-protal-server-nine.vercel.app/job-application/${jobId}`,
+      {
+        method: "DELETE",
+      }
+    )
       .then((res) => res.json())
       .then(() => {
-       
         setJobs(jobs.filter((job) => job._id !== jobId));
       })
       .catch((error) => console.error("Error deleting job:", error));
@@ -56,10 +65,7 @@ const MyApplications = () => {
                   <div className="flex items-center gap-3">
                     <div className="avatar">
                       <div className="mask mask-squircle h-12 w-12">
-                        <img
-                          src={job.company_logo}
-                          alt="Company Logo"
-                        />
+                        <img src={job.company_logo} alt="Company Logo" />
                       </div>
                     </div>
                     <div>
@@ -71,7 +77,9 @@ const MyApplications = () => {
                 <td>
                   {job.title}
                   <br />
-                  <span className="badge badge-ghost badge-sm">{job.company}</span>
+                  <span className="badge badge-ghost badge-sm">
+                    {job.company}
+                  </span>
                 </td>
                 <td>{job.location}</td>
                 <td>

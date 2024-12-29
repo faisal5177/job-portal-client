@@ -29,12 +29,13 @@ const SignIn = () => {
 
         signInUser(email, password)
         .then(result => {
-            console.log('sign in', result.user)
+            console.log('sign in', result.user.email)
+            const user = { email: result.user.email }
+            axios.post('https://job-protal-server-nine.vercel.app/jwt', user, {withCredentials: true})
+            .then(res=>{
+              console.log(res.data);
+            })
         })
-        .catch(error => {
-            console.log(error.message);
-        })
-       
       }
 
     return (

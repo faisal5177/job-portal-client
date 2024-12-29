@@ -6,26 +6,32 @@ const ViewApplications = () => {
     const applications = useLoaderData();
 
     const handleStatusUpdate = (e, id) => {
-        console.log(e.target.value, id)
+        console.log(e.target.value, id);
         const data = {
             status: e.target.value
-        }
-        fetch(`http://localhost:5001/job-applications/${id}`, {
+        };
+    
+        fetch(`https://job-protal-server-nine.vercel.app/job-applications/${id}`, {
             method: 'PATCH',
             headers: {
-                'content-type': 'application/json'
+                'Content-Type': 'application/json',
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(data),
         })
-            .then(res => res.json())
-            .then(data => {
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error('Failed to update status');
+                }
+                return res.json();
+            })
+            .then((data) => {
                 if (data.modifiedCount) {
                     Swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        title: "Status Has been updated.",
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Status has been updated.',
                         showConfirmButton: false,
-                        timer: 1500
+                        timer: 1500,
                     });
                 }
             })

@@ -32,7 +32,7 @@ const router = createBrowserRouter([
         {
           path: 'jobs/:id',
           element: <PrivateRoute><JobDetails></JobDetails></PrivateRoute>,
-          loader: ({params}) => fetch(`http://localhost:5001/jobs/${params.id}`)
+          loader: ({params}) => fetch(`https://job-protal-server-nine.vercel.app/jobs/${params.id}`)
         },
         {
           path: 'addJob',
@@ -41,7 +41,7 @@ const router = createBrowserRouter([
         {
           path: 'jobs/:id',
           element: <PrivateRoute><JobDetails /></PrivateRoute>,
-          loader: ({params}) => fetch(`http://localhost:5001/jobs/${params.id}`)
+          loader: ({params}) => fetch(`https://job-protal-server-nine.vercel.app/jobs/${params.id}`)
         },        
         {
           path: 'myPostedJobs',
@@ -50,7 +50,7 @@ const router = createBrowserRouter([
         {
           path: 'viewApplications/:job_id',
           element: <PrivateRoute><ViewApplication></ViewApplication></PrivateRoute>,
-          loader: ({params}) => fetch(`http://localhost:5001/job-application/jobs/${params.job_id}`)
+          loader: ({params}) => fetch(`https://job-protal-server-nine.vercel.app/job-application/jobs/${params.job_id}`)
         },
         {
             path: 'register',
